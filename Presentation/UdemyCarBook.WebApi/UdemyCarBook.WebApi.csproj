@@ -15,10 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\Core\UdemyCarBook.Domain\UdemyCarBook.Domain.csproj" />
     <ProjectReference Include="..\..\Infrastructure\UdemyCarBook.Persistence\UdemyCarBook.Persistence.csproj" />
   </ItemGroup>
 

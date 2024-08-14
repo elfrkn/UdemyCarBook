@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Domain.Entities
+namespace UdemyCarBook.Application.Features.CQRS.Results.AboutResults
 {
-    public class About
+    public class GetAboutByIdQueryResult
     {
         public int AboutID { get; set; }
         public string Title { get; set; }

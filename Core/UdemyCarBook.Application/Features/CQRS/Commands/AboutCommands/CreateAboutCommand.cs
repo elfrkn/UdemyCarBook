@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Domain.Entities
+namespace UdemyCarBook.Application.Features.CQRS.Commands.AboutCommands
 {
-    public class About
+    public class CreateAboutCommand
     {
-        public int AboutID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Domain.Entities
+namespace UdemyCarBook.Application.Features.CQRS.Commands.AboutCommands
 {
-    public class About
+    public class UpdateAboutCommand
     {
         public int AboutID { get; set; }
         public string Title { get; set; }

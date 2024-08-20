@@ -10,8 +10,6 @@ namespace UdemyCarBook.Application.Interfaces.CarRepositories
     public interface ICarRepository
     {
         List<Car> GetCarsListWithBrands();
-
         List<Car> GetLast5CarsWithBrands();
-
     }
 }

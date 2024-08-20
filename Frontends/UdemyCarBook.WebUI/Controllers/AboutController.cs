@@ -6,6 +6,9 @@ namespace UdemyCarBook.WebUI.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.v1 = "Hakkımızda";
+            ViewBag.v2 = "Vizyonumuz & Misyonumuz";
+
             return View();
         }
     }

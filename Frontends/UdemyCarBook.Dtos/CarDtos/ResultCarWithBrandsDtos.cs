@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UdemyCarBook.Dtos.CarDtos
 {
-    public class ResultCarWithBrandsDto
+    public class ResultCarWithBrandsDtos
     {
         public int CarID { get; set; }
         public int BrandID { get; set; }
@@ -19,6 +19,5 @@ namespace UdemyCarBook.Dtos.CarDtos
         public byte Luggage { get; set; }
         public string Fuel { get; set; }
         public string BigImageUrl { get; set; }
-
     }
 }

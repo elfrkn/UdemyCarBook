@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UdemyCarBook.Dtos.AboutDtos
 {
-    public class CreateAboutDto
+    public class UpdateAboutDto
     {
         public int aboutID { get; set; }
         public string title { get; set; }

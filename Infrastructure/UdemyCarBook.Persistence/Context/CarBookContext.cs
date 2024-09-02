@@ -30,7 +30,26 @@ namespace UdemyCarBook.Persistence.Context
         public DbSet<Author> Authors { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<TagCloud> TagClouds { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<RentACar> RentACars { get; set; }
+        public DbSet<RentACarProcess> RentACarProcesses { get; set; }
 
+        //Bir tablo içerisinde iki farklı Id yi karşı tarafın tek Id sı ile birleştirmek için kullanılıyor.Burada Rezervasyon tablosundaki PickUpLocationID ve DroppOffLocationID yi Location tablosundaki LocationID ile eşleştiriyoruz/birleştiriyoruz.
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Reservation>()
+                .HasOne(x => x.PickUpLocation) // pickuplocationu alıyoruz.
+                .WithMany(y => y.PickUpReservation) // pickuprezervation ile iliskilendirdik location tablosundaki.
+                .HasForeignKey(z => z.PickUpLocationID) // pickuplocationID sutunü ile ilişkilendirdik.
+                .OnDelete(DeleteBehavior.ClientSetNull); // Silindiğinde hata vermemesi için kullandık.
+
+            modelBuilder.Entity<Reservation>()
+                .HasOne(x => x.DropOffLocation)
+                .WithMany(y => y.DropOffReservation)
+                .HasForeignKey(z => z.DropOffLocationID)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+        }
 
     }
 }

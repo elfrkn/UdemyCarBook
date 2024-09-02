@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UdemyCarBook.Persistence.Context;
 
@@ -11,9 +12,11 @@ using UdemyCarBook.Persistence.Context;
 namespace UdemyCarBook.Persistence.Migrations
 {
     [DbContext(typeof(CarBookContext))]
-    partial class CarBookContextModelSnapshot : ModelSnapshot
+    [Migration("20240902105043_mig_rezervation")]
+    partial class mig_rezervation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -596,7 +599,7 @@ namespace UdemyCarBook.Persistence.Migrations
 
                     b.HasIndex("PickUpLocationID");
 
-                    b.ToTable("Reservation");
+                    b.ToTable("Rezervations");
                 });
 
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Service", b =>
@@ -831,17 +834,17 @@ namespace UdemyCarBook.Persistence.Migrations
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Reservation", b =>
                 {
                     b.HasOne("UdemyCarBook.Domain.Entities.Car", "Car")
-                        .WithMany("Reservations")
+                        .WithMany()
                         .HasForeignKey("CarID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UdemyCarBook.Domain.Entities.Location", "DropOffLocation")
-                        .WithMany("DropOffReservation")
+                        .WithMany()
                         .HasForeignKey("DropOffLocationID");
 
                     b.HasOne("UdemyCarBook.Domain.Entities.Location", "PickUpLocation")
-                        .WithMany("PickUpReservation")
+                        .WithMany()
                         .HasForeignKey("PickUpLocationID");
 
                     b.Navigation("Car");
@@ -883,8 +886,6 @@ namespace UdemyCarBook.Persistence.Migrations
                     b.Navigation("CarPricings");
 
                     b.Navigation("RentACars");
-
-                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Customer", b =>
@@ -899,10 +900,6 @@ namespace UdemyCarBook.Persistence.Migrations
 
             modelBuilder.Entity("UdemyCarBook.Domain.Entities.Location", b =>
                 {
-                    b.Navigation("DropOffReservation");
-
-                    b.Navigation("PickUpReservation");
-
                     b.Navigation("RentACars");
                 });
 

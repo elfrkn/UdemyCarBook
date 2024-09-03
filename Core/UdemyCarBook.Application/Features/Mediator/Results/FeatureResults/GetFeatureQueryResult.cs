@@ -11,5 +11,6 @@ namespace UdemyCarBook.Application.Features.Mediator.Results.FeatureResults
         public int FeatureID { get; set; }
         public string Name { get; set; }
 
+
     }
 }

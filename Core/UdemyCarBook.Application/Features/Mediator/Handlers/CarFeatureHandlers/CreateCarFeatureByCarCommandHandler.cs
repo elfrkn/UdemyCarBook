@@ -23,7 +23,7 @@ namespace UdemyCarBook.Application.Features.Mediator.Handlers.CarFeatureHandlers
         {
             _repository.CreateCarFeatureByCar(new CarFeature
             {
-                Available = false,
+                Available =false,
                 CarID = request.CarID,
                 FeatureID = request.FeatureID
             });

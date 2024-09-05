@@ -1,5 +1,8 @@
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 using UdemyCarBook.Application.Features.CQRS.Handlers.AboutHandlers;
 using UdemyCarBook.Application.Features.CQRS.Handlers.BannerHandlers;
 using UdemyCarBook.Application.Features.CQRS.Handlers.BrandHandlers;
@@ -18,6 +21,7 @@ using UdemyCarBook.Application.Interfaces.RentACarInterfaces;
 using UdemyCarBook.Application.Interfaces.ReviewInterfaces;
 using UdemyCarBook.Application.Interfaces.StatisticsInterfaces;
 using UdemyCarBook.Application.Services;
+using UdemyCarBook.Application.Tools;
 using UdemyCarBook.Persistence.Context;
 using UdemyCarBook.Persistence.Respositories;
 using UdemyCarBook.Persistence.Respositories.BlogRepositories;
@@ -33,6 +37,21 @@ using UdemyCarBook.Persistence.Respositories.TagCloudRepositories;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.RequireHttpsMetadata = false;
+    opt.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidAudience = JwtTokenDefaults.ValidAudience, // Dinleyici
+        ValidIssuer = JwtTokenDefaults.ValidIssuer, // Yayıncı
+        ClockSkew = TimeSpan.Zero,//Tokenın başlangıç noktasını sıfırlama
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)), //kullanıcının sayfayı açması için sahip olması gereken key 16 karakter istiyor.
+        ValidateLifetime = true, //Tokenın ayakta kalma zamanı
+        ValidateIssuerSigningKey = true,
+    };
+});
+
 
 // Add services to the container.
 
@@ -108,7 +127,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

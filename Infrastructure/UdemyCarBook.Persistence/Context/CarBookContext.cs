@@ -33,6 +33,7 @@ namespace UdemyCarBook.Persistence.Context
         public DbSet<Customer> Customers { get; set; }
         public DbSet<RentACar> RentACars { get; set; }
         public DbSet<RentACarProcess> RentACarProcesses { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
         //Bir tablo içerisinde iki farklı Id yi karşı tarafın tek Id sı ile birleştirmek için kullanılıyor.Burada Rezervasyon tablosundaki PickUpLocationID ve DroppOffLocationID yi Location tablosundaki LocationID ile eşleştiriyoruz/birleştiriyoruz.
         protected override void OnModelCreating(ModelBuilder modelBuilder)

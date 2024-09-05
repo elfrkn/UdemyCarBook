@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Dtos.ReviewDtos
+namespace UdemyCarBook.Domain.Entities
 {
-    public class ResultReviewByCarIdDto
+    public class Review
     {
         public int ReviewID { get; set; }
         public string CustomerName { get; set; }
@@ -14,6 +14,8 @@ namespace UdemyCarBook.Dtos.ReviewDtos
         public string Comment { get; set; }
         public int RaytingValue { get; set; }
         public DateTime ReviewDate { get; set; }
+        public Car Car { get; set; }
         public int CarID { get; set; }
+
     }
 }

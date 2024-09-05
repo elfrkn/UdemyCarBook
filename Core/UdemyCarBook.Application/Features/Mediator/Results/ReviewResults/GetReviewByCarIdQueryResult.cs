@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UdemyCarBook.Dtos.ReviewDtos
+namespace UdemyCarBook.Application.Features.Mediator.Results.ReviewResults
 {
-    public class ResultReviewByCarIdDto
+    public class GetReviewByCarIdQueryResult
     {
         public int ReviewID { get; set; }
         public string CustomerName { get; set; }
@@ -15,5 +15,6 @@ namespace UdemyCarBook.Dtos.ReviewDtos
         public int RaytingValue { get; set; }
         public DateTime ReviewDate { get; set; }
         public int CarID { get; set; }
+
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using UdemyCarBook.Application.Features.Mediator.Commands.ReviewCommands;
 using UdemyCarBook.Application.Features.Mediator.Queries.ReviewQueries;
+using UdemyCarBook.Application.Validators.ReviewValidator;
 
 namespace UdemyCarBook.WebApi.Controllers
 {
@@ -26,9 +27,20 @@ namespace UdemyCarBook.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateReview(CreateReviewCommand command)
         {
-           
-            await _mediator.Send(command);
-            return Ok("Ekleme işlemi gerçekleşti");
+            CreateReviewValidator validations = new CreateReviewValidator();
+            var validationResult = validations.Validate(command);
+
+            if (!validationResult.IsValid)
+            {
+                return BadRequest(validationResult);
+            }
+            else
+            {
+                await _mediator.Send(command);
+                return Ok("Ekleme işlemi gerçekleşti");
+            }
+
+          
         }
 
         [HttpPut]

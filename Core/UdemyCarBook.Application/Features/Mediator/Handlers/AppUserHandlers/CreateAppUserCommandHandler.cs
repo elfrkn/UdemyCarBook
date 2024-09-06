@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UdemyCarBook.Application.Enums;
 using UdemyCarBook.Application.Features.Mediator.Commands.AppUserCommands;
 using UdemyCarBook.Application.Interfaces;
 using UdemyCarBook.Domain.Entities;
@@ -23,10 +24,10 @@ namespace UdemyCarBook.Application.Features.Mediator.Handlers.AppUserHandlers
             {
                 Password = request.Password,
                 Username = request.Username,
-                //AppRoleId = (int)RolesType.Member,
-                //Email = request.Email,
-                //Name = request.Name,
-                //Surname = request.Surname
+                AppRoleId = (int)RolesType.Member,
+                Email = request.Email,
+                Name = request.Name,
+                Surname = request.Surname
             });
         }
     }

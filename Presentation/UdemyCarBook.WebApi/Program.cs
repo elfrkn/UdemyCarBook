@@ -34,9 +34,27 @@ using UdemyCarBook.Persistence.Respositories.RentACarRepositories;
 using UdemyCarBook.Persistence.Respositories.ReviewRepositories;
 using UdemyCarBook.Persistence.Respositories.StatisticsRepositories;
 using UdemyCarBook.Persistence.Respositories.TagCloudRepositories;
+using UdemyCarBook.WebApi.Hubs;
 
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddHttpClient();
+
+
+// Apiyi UI tarafında tüketmek için verilen izin
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+        .AllowAnyMethod()
+        .SetIsOriginAllowed((host) => true)
+        .AllowCredentials();
+    });
+});
+builder.Services.AddSignalR();
+
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
 {
@@ -126,10 +144,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<CarHub>("/carhub");
 
 app.Run();

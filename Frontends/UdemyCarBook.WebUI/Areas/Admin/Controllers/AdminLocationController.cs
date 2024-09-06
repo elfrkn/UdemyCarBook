@@ -7,7 +7,7 @@ using UdemyCarBook.Dtos.LocationDtos;
 
 namespace UdemyCarBook.WebUI.Areas.Admin.Controllers
 {
-    
+    [Authorize(Roles ="Admin")]
     [Area("Admin")]
     [Route("Admin/AdminLocation")]
     public class AdminLocationController : Controller
@@ -21,6 +21,7 @@ namespace UdemyCarBook.WebUI.Areas.Admin.Controllers
         [Route("Index")]
         public async Task<IActionResult> Index()
         {
+
          
                 var client = _httpClientFactory.CreateClient();
                 var responseMessage = await client.GetAsync("https://localhost:7026/api/Locations");
@@ -30,7 +31,7 @@ namespace UdemyCarBook.WebUI.Areas.Admin.Controllers
                     var values = JsonConvert.DeserializeObject<List<ResultLocationDto>>(jsonData);
                     return View(values);
                 }
-            
+
             return View();
 
         }
